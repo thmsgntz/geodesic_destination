@@ -11,6 +11,11 @@ bearing in radians measured clockwise from geographic North, it computes the
 resulting destination point (latitude/longitude in radians).
 
 Published on crates.io: https://crates.io/crates/geodesic_destination
+Documentation: https://docs.rs/geodesic_destination
+
+## Documentation
+
+API docs are hosted on docs.rs: https://docs.rs/geodesic_destination
 
 ## Features
 

@@ -9,6 +9,9 @@ readme = "README.md"
 keywords = ["geodesy", "geodesic", "navigation", "bearing", "gps"]
 categories = ["science", "mathematics"]
 
+[package.metadata.docs.rs]
+all-features = true
+
 [lib]
 name = "geodesic_destination"
 path = "src/lib.rs"
