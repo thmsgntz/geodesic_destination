@@ -7,13 +7,7 @@ const LON_TOLERANCE_RAD: f64 = 1e-6;
 const BEARING_TOLERANCE_RAD: f64 = 1e-3;
 
 fn assert_approx_eq(a: f64, b: f64, eps: f64) {
-    assert!(
-        (a - b).abs() < eps,
-        "expected {} ≈ {} within {}",
-        a,
-        b,
-        eps
-    );
+    assert!((a - b).abs() < eps, "expected {} ≈ {} within {}", a, b, eps);
 }
 
 fn haversine_m(a: LatLon, b: LatLon, radius_m: f64) -> f64 {

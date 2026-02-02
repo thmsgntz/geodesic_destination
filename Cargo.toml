@@ -2,6 +2,12 @@
 name = "geodesic_destination"
 version = "0.1.0"
 edition = "2021"
+description = "Compute the destination point for a bearing and distance on a spherical Earth."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/yourname/geodesic_destination"
+readme = "README.md"
+keywords = ["geodesy", "geodesic", "navigation", "bearing", "gps"]
+categories = ["science", "mathematics"]
 
 [lib]
 name = "geodesic_destination"

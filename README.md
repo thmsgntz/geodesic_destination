@@ -58,6 +58,7 @@ All angles are in radians and distances are in meters.
 - Uses a spherical Earth model (not WGS84/ellipsoidal)
 - Appropriate for short to medium distances
 - Not suitable for high-precision surveying or geodetic applications
+- `no_std` is not enabled yet because the crate currently relies on `std` trigonometry
 
 ## Testing
 
