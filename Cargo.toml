@@ -1,0 +1,10 @@
+[package]
+name = "geodesic_destination"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "geodesic_destination"
+path = "src/lib.rs"
+
+[dependencies]
