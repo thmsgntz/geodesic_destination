@@ -1,3 +1,6 @@
+#![forbid(unsafe_code)]
+#![warn(missing_docs)]
+
 //! Spherical direct geodesic (destination point) calculation.
 //!
 //! This crate solves the *direct* geodesic problem on a spherical Earth model:
@@ -24,9 +27,9 @@ pub const EARTH_RADIUS_M: f64 = 6_371_000.0;
 /// Latitude/longitude pair in radians.
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct LatLon {
-    /// Latitude in radians.
+    /// Latitude in radians, in the range [-π/2, π/2].
     pub lat: f64,
-    /// Longitude in radians.
+    /// Longitude in radians, in the range [-π, π].
     pub lon: f64,
 }
 
@@ -39,12 +42,22 @@ impl LatLon {
 }
 
 /// Returns the destination point using the mean Earth radius.
+///
+/// Inputs are in radians (lat/lon), meters (distance), and radians (bearing).
+/// Bearing is measured clockwise from geographic North.
 #[must_use]
 pub fn destination(start: LatLon, distance_m: f64, bearing_rad: f64) -> LatLon {
     destination_with_radius(start, distance_m, bearing_rad, EARTH_RADIUS_M)
 }
 
 /// Returns the destination point using a custom spherical radius.
+///
+/// Inputs are in radians (lat/lon), meters (distance, radius), and radians
+/// (bearing). Bearing is measured clockwise from geographic North.
+///
+/// # Panics
+///
+/// Panics if `radius_m` is not positive.
 #[must_use]
 pub fn destination_with_radius(
     start: LatLon,
@@ -52,6 +65,8 @@ pub fn destination_with_radius(
     bearing_rad: f64,
     radius_m: f64,
 ) -> LatLon {
+    assert!(radius_m > 0.0, "radius_m must be positive");
+
     if distance_m == 0.0 {
         return start;
     }
@@ -70,7 +85,7 @@ pub fn destination_with_radius(
 
     let y = bearing_rad.sin() * sin_delta * cos_lat1;
     let x = cos_delta - sin_lat1 * lat2.sin();
-    let lon2 = normalize_lon(start.lon + y.atan2(x));
+    let lon2 = wrap_pi(start.lon + y.atan2(x));
 
     LatLon::new(lat2, lon2)
 }
@@ -79,7 +94,7 @@ fn clamp(value: f64, min: f64, max: f64) -> f64 {
     value.max(min).min(max)
 }
 
-fn normalize_lon(lon: f64) -> f64 {
+fn wrap_pi(lon: f64) -> f64 {
     let mut wrapped = (lon + PI) % (2.0 * PI);
     if wrapped < 0.0 {
         wrapped += 2.0 * PI;
