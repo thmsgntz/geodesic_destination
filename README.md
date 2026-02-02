@@ -1,9 +1,16 @@
 # geodesic_destination
 
+[![Crates.io](https://img.shields.io/crates/v/geodesic_destination)](https://crates.io/crates/geodesic_destination)
+[![Docs.rs](https://docs.rs/geodesic_destination/badge.svg)](https://docs.rs/geodesic_destination)
+[![CI](https://github.com/thmsgntz/geodesic_destination/actions/workflows/ci.yml/badge.svg)](https://github.com/thmsgntz/geodesic_destination/actions/workflows/ci.yml)
+[![License](https://img.shields.io/crates/l/geodesic_destination)](https://crates.io/crates/geodesic_destination)
+
 `geodesic_destination` solves the direct geodesic problem on a spherical Earth.
 Given a start point (latitude/longitude in radians), a distance in meters, and a
 bearing in radians measured clockwise from geographic North, it computes the
 resulting destination point (latitude/longitude in radians).
+
+Published on crates.io: https://crates.io/crates/geodesic_destination
 
 ## Features
 
