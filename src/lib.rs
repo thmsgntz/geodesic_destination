@@ -169,6 +169,8 @@ pub mod test_utils {
         let sin_dlat = (dlat * 0.5).sin();
         let sin_dlon = (dlon * 0.5).sin();
         let a = sin_dlat * sin_dlat + p.lat.cos() * q.lat.cos() * sin_dlon * sin_dlon;
+        // Clamp to avoid tiny floating-point drift outside [0, 1].
+        let a = super::clamp(a, 0.0, 1.0);
         let c = 2.0 * a.sqrt().atan2((1.0 - a).sqrt());
         EARTH_RADIUS_M * c
     }
